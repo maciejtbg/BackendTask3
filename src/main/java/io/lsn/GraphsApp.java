@@ -17,8 +17,27 @@ public class GraphsApp {
         printOutput(connections);
         Map<Integer,Set<Integer>> graph = getGraphFromConnections(connections);
         System.out.println(graph);
+        System.out.println("How many graphs: "+getNumberOfGraphs(graph));
+    }
+
+    private static int getNumberOfGraphs(Map<Integer, Set<Integer>> graph) {
+        int numberOfGraphs = 0;
+        Set<Integer> nodesVisited = new HashSet<>();
+        DigInGraph(graph, 1, nodesVisited);
 
 
+
+        return numberOfGraphs;
+    }
+
+    private static void DigInGraph(Map<Integer, Set<Integer>> graph, int node, Set<Integer> nodesVisited) {
+        nodesVisited.add(node);
+        System.out.println("I'm visiting node: "+node);
+        for (int childNode:graph.get(node)) {
+            if (!nodesVisited.contains(childNode)){
+                DigInGraph(graph,childNode,nodesVisited);
+            }
+        }
     }
 
     private static Map<Integer, Set<Integer>> getGraphFromConnections(Set<int[]> connections) {
