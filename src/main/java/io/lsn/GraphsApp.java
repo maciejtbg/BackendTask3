@@ -23,8 +23,13 @@ public class GraphsApp {
     private static int getNumberOfGraphs(Map<Integer, Set<Integer>> graph) {
         int numberOfGraphs = 0;
         Set<Integer> nodesVisited = new HashSet<>();
-        DigInGraph(graph, 1, nodesVisited);
-
+        for (Integer key : graph.keySet()) {
+            if (!nodesVisited.contains(key)) {
+                DigInGraph(graph, key, nodesVisited);
+                numberOfGraphs++;
+            }
+        }
+        System.out.println("Visits after one dig: " + nodesVisited);
 
 
         return numberOfGraphs;
